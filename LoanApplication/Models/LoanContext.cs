@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using LoanApplication.Models;
  
  namespace LoanApplication.Models;
  
@@ -10,4 +11,6 @@ using Microsoft.EntityFrameworkCore;
      }
  
      public DbSet<User> Users { get; set; } = null!;
+ 
+public DbSet<LoanApplication.Models.Loan> Loan { get; set; } = default!;
  }
