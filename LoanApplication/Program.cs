@@ -10,6 +10,10 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
+    app.UseSwaggerUi(options =>
+    {
+        options.DocumentPath = "/v1/swagger.json";
+    });
 }
 
 app.UseHttpsRedirection();
