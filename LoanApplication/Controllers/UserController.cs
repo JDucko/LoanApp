@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using LoanApplication.Entities;
-using LoanApplication.Data;
+using LoanApplication.Services;
 
 namespace LoanApplication.Controllers
 {
@@ -16,7 +16,7 @@ namespace LoanApplication.Controllers
     {
         private readonly IUserService _userService;
 
-        public UserController(ILoanService loanService)
+        public UserController(IUserService userService)
         {
             _userService = userService;
         }
@@ -25,21 +25,22 @@ namespace LoanApplication.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<User>>> GetUsers()
         {
-            return await _userService.GetAllUsersAsync();
+            var users = await _userService.GetAllUsersAsync();
+            return Ok(users);
         }
 
         // GET: api/User/5
         [HttpGet("{id}")]
         public async Task<ActionResult<User>> GetUser(int id)
         {
-            var user = await _userService.Get(id);
+            var user = await _userService.GetUserAsync(id);
 
             if (user == null)
             {
                 return NotFound();
             }
 
-            return user;
+            return Ok(user);
         }
 
         // POST: api/User
@@ -48,14 +49,10 @@ namespace LoanApplication.Controllers
         public async Task<ActionResult<User>> PostUser(User user)
         {
             //TODO: Validation and error handling
-            await _userService.Add(user);
+            await _userService.CreateUserAsync(user);
 
             return CreatedAtAction("GetUser", new { id = user.Id }, user);
         }
 
-        private bool UserExists(int id)
-        {
-            return _context.Users.Any(e => e.Id == id);
-        }
     }
 }
