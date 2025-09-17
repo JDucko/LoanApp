@@ -12,5 +12,8 @@ public class LoanRepository : RepoBase<Loan, int>, ILoanRepository
     {
     }
 
-    // If there are Loan-specific repository methods, implement them here.
+    public IEnumerable<T> GetLoansByUserId(long userId)
+    {
+        return _context.Set<Loan>().Where(loan => loan.UserId == userId);
+    }
 }
