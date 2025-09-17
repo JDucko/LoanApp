@@ -7,6 +7,6 @@ namespace LoanApplication.Repos
     public interface ILoanRepository : LoanApplication.Repos.Base.IRepoBase<Loan, int>
     {
         // Add Loan-specific methods here if needed
-        IEnumerable<T> GetLoansByUserId(long userId);
+        IEnumerable<Loan> GetLoansByUserId(int userId);
     }
 }

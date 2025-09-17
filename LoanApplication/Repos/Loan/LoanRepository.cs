@@ -1,5 +1,6 @@
 
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 using LoanApplication.Models;
 using LoanApplication.Data;
 using LoanApplication.Repos.Base;
@@ -12,7 +13,7 @@ public class LoanRepository : RepoBase<Loan, int>, ILoanRepository
     {
     }
 
-    public IEnumerable<T> GetLoansByUserId(long userId)
+    public IEnumerable<Loan> GetLoansByUserId(int userId)
     {
         return _context.Set<Loan>().Where(loan => loan.UserId == userId);
     }
