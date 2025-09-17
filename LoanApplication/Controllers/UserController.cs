@@ -14,25 +14,25 @@ namespace LoanApplication.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        private readonly Context _context;
+        private readonly IUserService _userService;
 
-        public UserController(Context context)
+        public UserController(ILoanService loanService)
         {
-            _context = context;
+            _userService = userService;
         }
 
         // GET: api/User
         [HttpGet]
         public async Task<ActionResult<IEnumerable<User>>> GetUsers()
         {
-            return await _context.Users.ToListAsync();
+            return await _userService.GetAllUsersAsync();
         }
 
         // GET: api/User/5
         [HttpGet("{id}")]
         public async Task<ActionResult<User>> GetUser(int id)
         {
-            var user = await _context.Users.FindAsync(id);
+            var user = await _userService.Get(id);
 
             if (user == null)
             {
@@ -78,8 +78,8 @@ namespace LoanApplication.Controllers
         [HttpPost]
         public async Task<ActionResult<User>> PostUser(User user)
         {
-            _context.Users.Add(user);
-            await _context.SaveChangesAsync();
+            //TODO: Validation and error handling
+            await _userService.Add(user);
 
             return CreatedAtAction("GetUser", new { id = user.Id }, user);
         }
