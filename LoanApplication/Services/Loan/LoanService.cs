@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using LoanApplication.Models;
 using LoanApplication.Repos;
 
-namespace LoanApplication.Services;
+namespace LoanApplication.Services.Loan;
 
 public class LoanService : ILoanService
 {
