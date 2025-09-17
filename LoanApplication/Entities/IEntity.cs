@@ -1,4 +1,4 @@
-namespace LoanApplication.Models;
+namespace LoanApplication.Entities;
 
 public interface IEntity<TId>
 {
