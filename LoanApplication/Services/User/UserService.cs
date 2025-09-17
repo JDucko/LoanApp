@@ -1,4 +1,4 @@
-namespace LoanApplication.Services.User;
+namespace LoanApplication.Services;
 
 public class UserService : IUserService
 {

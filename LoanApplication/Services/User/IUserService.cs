@@ -1,8 +1,7 @@
-namespace LoanApplication.Services.User
+namespace LoanApplication.Services;
+
+public interface IUserService
 {
-    public interface IUserService
-    {
-        Task<bool> Add(User user);
-        Task<User> Get(int id);
-    }
+    Task<bool> Add(User user);
+    Task<User> Get(int id);
 }
