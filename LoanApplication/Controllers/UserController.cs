@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using LoanApplication.Models;
+using LoanApplication.Data;
 
 namespace LoanApplication.Controllers
 {
@@ -13,9 +14,9 @@ namespace LoanApplication.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        private readonly LoanContext _context;
+        private readonly Context _context;
 
-        public UserController(LoanContext context)
+        public UserController(Context context)
         {
             _context = context;
         }
