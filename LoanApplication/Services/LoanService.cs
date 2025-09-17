@@ -24,16 +24,17 @@ public class LoanService : ILoanService
     {
         return await _loanRepository.GetByIdAsync(id);
     }
+    
+    public async Task<IEnumerable<Loan>> GetAllLoansByUserIdAsync(long userId)
+    {
+        // Implement logic to get loans by user ID if needed
+        return await _loanRepository.GetLoansByUserId(userId);
+    }
 
     public async Task<Loan> CreateLoanAsync(Loan loan)
     {
         loan.CreatedAt = DateTime.UtcNow;
         return await _loanRepository.AddAsync(loan);
     }
-
-    public async Task<bool> UpdateLoanAsync(Loan loan)
-    {
-        return await _loanRepository.UpdateAsync(loan);
-    }
-
+    // Implement other methods as needed
 }
