@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using LoanApplication.Models;
+using LoanApplication.Entities;
 using LoanApplication.Repos;
 
 namespace LoanApplication.Services;

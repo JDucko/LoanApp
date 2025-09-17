@@ -1,4 +1,4 @@
-using LoanApplication.Models;
+using LoanApplication.Entities;
 using LoanApplication.Data;
 using Microsoft.EntityFrameworkCore;
 using Autofac;

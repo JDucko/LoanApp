@@ -3,7 +3,7 @@ namespace LoanApplication.Repos.Base;
 
 using System.Linq.Expressions;
 
-using LoanApplication.Models;
+using LoanApplication.Entities;
 
 public interface IRepoBase<T, TId> where T : class, IEntity<TId>
 {

@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using LoanApplication.Models;
+using LoanApplication.Entities;
 
 namespace LoanApplication.Data;
 

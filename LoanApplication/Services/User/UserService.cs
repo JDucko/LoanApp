@@ -1,3 +1,6 @@
+
+using LoanApplication.Entities;
+
 namespace LoanApplication.Services;
 
 public class UserService : IUserService

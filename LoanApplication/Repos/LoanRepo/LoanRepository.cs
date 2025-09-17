@@ -1,7 +1,7 @@
 
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
-using LoanApplication.Models;
+using LoanApplication.Entities;
 using LoanApplication.Data;
 using LoanApplication.Repos.Base;
 

@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using LoanApplication.Models;
+using LoanApplication.Entities;
 using LoanApplication.Services;
 
 namespace LoanApplication.Controllers;

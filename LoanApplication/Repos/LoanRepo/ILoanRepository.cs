@@ -1,4 +1,4 @@
-using LoanApplication.Models;
+using LoanApplication.Entities;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 

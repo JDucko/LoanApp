@@ -1,5 +1,5 @@
 
-using LoanApplication.Models;
+using LoanApplication.Entities;
 
 namespace LoanApplication.Services;
 

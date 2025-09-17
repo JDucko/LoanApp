@@ -1,8 +1,11 @@
+
+using LoanApplication.Entities;
+
 namespace LoanApplication.Repos.UserRepo
 {
     public class UserRepository : LoanApplication.Repos.Base.RepoBase<User>, IUserRepository
     {
-        public UserRepository(LoanDbContext context) : base(context)
+        public UserRepository(Context context) : base(context)
         {
         }
 
