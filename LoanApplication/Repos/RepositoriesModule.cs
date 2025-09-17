@@ -12,7 +12,7 @@ public class RepositoriesModule : Module
             .InstancePerLifetimeScope();
 
         // Concrete repository registrations
-        builder.RegisterType<Repos.LoanRepository>()
+        builder.RegisterType<Repos.LoanRepo.LoanRepository>()
             .As<Repos.ILoanRepository>()
             .InstancePerLifetimeScope();
 
