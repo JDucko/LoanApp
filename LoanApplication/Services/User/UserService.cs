@@ -1,5 +1,8 @@
-
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using LoanApplication.Entities;
+using LoanApplication.Repos.UserRepo;
 
 namespace LoanApplication.Services;
 
@@ -12,15 +15,19 @@ public class UserService : IUserService
         _userRepository = userRepository;
     }
 
-    public async Task<bool> Add(User user)
+    public async Task<User> CreateUserAsync(User user)
     {
-        await _userRepository.Add(user);
-        return true;
+        return await _userRepository.AddAsync(user);
     }
 
-    public async Task<User> Get(int id)
+    public async Task<User> GetUserAsync(int id)
     {
-        return await _userRepository.Get(id);
+        return await _userRepository.GetByIdAsync(id);
+    }
+
+    public async Task<IEnumerable<User>> GetAllUsersAsync()
+    {
+        return await _userRepository.GetAllAsync();
     }
 }
 
