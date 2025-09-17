@@ -1,36 +1,49 @@
 using LoanApplication.Models;
 using LoanApplication.Data;
 using Microsoft.EntityFrameworkCore;
+using Autofac;
+using Autofac.Extensions.DependencyInjection;
+using NSwag.AspNetCore;
+using NSwag.AspNetCore.Middlewares;
 
-var builder = WebApplication.CreateBuilder(args);
+// Use the standard Autofac service provider factory
 
-// Add services to the container.
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-builder.Services.AddOpenApi();
-builder.Services.AddControllers();
-builder.Services.AddDbContext<Context>(options => options.UseInMemoryDatabase("LoanList"));
-// Repository and service registrations
-// Register open-generic repository base so concrete repos can be resolved if needed
-builder.Services.AddScoped(typeof(LoanApplication.Repos.Base.IRepoBase<,>), typeof(LoanApplication.Repos.Base.RepoBase<,>));
-// Concrete registrations
-builder.Services.AddScoped<LoanApplication.Repos.ILoanRepository, LoanApplication.Repos.LoanRepository>();
-builder.Services.AddScoped<LoanApplication.Services.ILoanService, LoanApplication.Services.LoanService>();
-// UnitOfWork registration removed
-
-var app = builder.Build();
-
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+public class Program
 {
-    app.MapOpenApi();
-    app.UseSwaggerUi(options =>
+    public static void Main(string[] args)
     {
-        options.DocumentPath = "/openapi/v1.json";
-    });
+        var builder = WebApplication.CreateBuilder(args);
+
+        // Use Autofac as the DI container
+        builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
+
+        builder.Host.ConfigureContainer<ContainerBuilder>(containerBuilder =>
+        {
+            // Load Autofac modules with registrations
+            containerBuilder.RegisterModule(new LoanApplication.Repos.RepositoriesModule());
+            containerBuilder.RegisterModule(new LoanApplication.Services.ServicesModule());
+        });
+
+        // Configure OpenAPI via NSwag for generation and Swashbuckle for UI
+        builder.Services.AddOpenApiDocument();
+        builder.Services.AddEndpointsApiExplorer();
+        builder.Services.AddSwaggerGen();
+        builder.Services.AddControllers();
+        builder.Services.AddDbContext<Context>(options => options.UseInMemoryDatabase("LoanList"));
+        var app = builder.Build();
+
+        // Configure the HTTP request pipeline.
+        if (app.Environment.IsDevelopment())
+        {
+            app.UseOpenApi();
+            app.UseSwagger();
+            app.UseSwaggerUI();
+        }
+
+        app.UseHttpsRedirection();
+
+        app.MapControllers();
+
+        app.Run();
+    }
 }
-
-app.UseHttpsRedirection();
-
-app.MapControllers();
-
-app.Run();

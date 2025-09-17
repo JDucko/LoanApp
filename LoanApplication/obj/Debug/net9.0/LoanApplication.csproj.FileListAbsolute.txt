@@ -18,7 +18,6 @@ C:\Users\phatp\OneDrive\Documents\Code\LoanApp\LoanApplication\bin\Debug\net9.0\
 C:\Users\phatp\OneDrive\Documents\Code\LoanApp\LoanApplication\bin\Debug\net9.0\Azure.Core.dll
 C:\Users\phatp\OneDrive\Documents\Code\LoanApp\LoanApplication\bin\Debug\net9.0\Azure.Identity.dll
 C:\Users\phatp\OneDrive\Documents\Code\LoanApp\LoanApplication\bin\Debug\net9.0\Humanizer.dll
-C:\Users\phatp\OneDrive\Documents\Code\LoanApp\LoanApplication\bin\Debug\net9.0\Microsoft.AspNetCore.OpenApi.dll
 C:\Users\phatp\OneDrive\Documents\Code\LoanApp\LoanApplication\bin\Debug\net9.0\Microsoft.AspNetCore.Razor.Language.dll
 C:\Users\phatp\OneDrive\Documents\Code\LoanApp\LoanApplication\bin\Debug\net9.0\Microsoft.Bcl.AsyncInterfaces.dll
 C:\Users\phatp\OneDrive\Documents\Code\LoanApp\LoanApplication\bin\Debug\net9.0\Microsoft.Build.dll
@@ -282,3 +281,8 @@ C:\Users\phatp\OneDrive\Documents\Code\LoanApp\LoanApplication\obj\Debug\net9.0\
 C:\Users\phatp\OneDrive\Documents\Code\LoanApp\LoanApplication\obj\Debug\net9.0\LoanApplication.pdb
 C:\Users\phatp\OneDrive\Documents\Code\LoanApp\LoanApplication\obj\Debug\net9.0\LoanApplication.genruntimeconfig.cache
 C:\Users\phatp\OneDrive\Documents\Code\LoanApp\LoanApplication\obj\Debug\net9.0\ref\LoanApplication.dll
+C:\Users\phatp\OneDrive\Documents\Code\LoanApp\LoanApplication\bin\Debug\net9.0\Autofac.dll
+C:\Users\phatp\OneDrive\Documents\Code\LoanApp\LoanApplication\bin\Debug\net9.0\Autofac.Extensions.DependencyInjection.dll
+C:\Users\phatp\OneDrive\Documents\Code\LoanApp\LoanApplication\bin\Debug\net9.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\phatp\OneDrive\Documents\Code\LoanApp\LoanApplication\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\phatp\OneDrive\Documents\Code\LoanApp\LoanApplication\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerUI.dll
