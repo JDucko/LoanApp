@@ -1,3 +1,7 @@
+using Microsoft.AspNetCore.Mvc;
+using LoanApplication.Models;
+using LoanApplication.Services;
+
 namespace LoanApplication.Controllers;
 
 [Route("api/[controller]")]

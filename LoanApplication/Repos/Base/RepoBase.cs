@@ -1,4 +1,10 @@
+using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
+using LoanApplication.Data;
+
 namespace LoanApplication.Repos.Base;
+
+using LoanApplication.Models;
 
 public class RepoBase<TEntity, TId> : IRepoBase<TEntity, TId> where TEntity : class, IEntity<TId>
 {

@@ -1,6 +1,6 @@
 namespace LoanApplication.Repos.UserRepo
 {
-    public class UserRepository : Repos.Base.RepoBase<User>, IUserRepository
+    public class UserRepository : LoanApplication.Repos.Base.RepoBase<User>, IUserRepository
     {
         public UserRepository(LoanDbContext context) : base(context)
         {

@@ -1,3 +1,6 @@
+using Microsoft.EntityFrameworkCore;
+using LoanApplication.Models;
+
 namespace LoanApplication.Data;
 
 public class Context : DbContext

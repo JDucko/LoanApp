@@ -1,3 +1,10 @@
+
+using Microsoft.EntityFrameworkCore;
+using System.Linq;
+using LoanApplication.Models;
+using LoanApplication.Data;
+using LoanApplication.Repos.Base;
+
 namespace LoanApplication.Repos.LoanRepo;
 
 public class LoanRepository : RepoBase<Loan, int>, ILoanRepository
