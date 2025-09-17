@@ -41,6 +41,7 @@ public class LoanController : ControllerBase
     [HttpPost]
     public async Task<ActionResult<Loan>> PostLoan(Loan loan)
     {
+        //TODO: Validation and error handling
         var created = await _loanService.CreateLoanAsync(loan);
         return CreatedAtAction(nameof(GetLoanById), new { id = created.Id }, created);
     }

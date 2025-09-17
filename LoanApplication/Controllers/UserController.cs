@@ -49,6 +49,7 @@ namespace LoanApplication.Controllers
         public async Task<ActionResult<User>> PostUser(User user)
         {
             //TODO: Validation and error handling
+            
             await _userService.CreateUserAsync(user);
 
             return CreatedAtAction("GetUser", new { id = user.Id }, user);
