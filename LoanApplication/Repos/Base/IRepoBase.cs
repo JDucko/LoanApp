@@ -1,10 +1,6 @@
 
 namespace LoanApplication.Repos.Base;
 
-using System.Linq.Expressions;
-
-using LoanApplication.Models;
-
 public interface IRepoBase<T, TId> where T : class, IEntity<TId>
 {
     void Add(T objModel);

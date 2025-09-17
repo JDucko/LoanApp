@@ -1,4 +1,4 @@
-namespace LoanApplication.Repos.LoanRepo;
+namespace LoanApplication.Repos;
 
 public class LoanRepository : RepoBase<Loan, int>, ILoanRepository
 {

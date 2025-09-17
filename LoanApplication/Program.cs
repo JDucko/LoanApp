@@ -1,11 +1,3 @@
-using LoanApplication.Models;
-using LoanApplication.Data;
-using Microsoft.EntityFrameworkCore;
-using Autofac;
-using Autofac.Extensions.DependencyInjection;
-using NSwag.AspNetCore;
-using NSwag.AspNetCore.Middlewares;
-
 // Use the standard Autofac service provider factory
 
 public class Program
