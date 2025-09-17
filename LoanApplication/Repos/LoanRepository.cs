@@ -1,0 +1,16 @@
+
+using Microsoft.EntityFrameworkCore;
+using LoanApplication.Models;
+using LoanApplication.Data;
+using LoanApplication.Repos.Base;
+
+namespace LoanApplication.Repos;
+
+public class LoanRepository : RepoBase<Loan, int>, ILoanRepository
+{
+    public LoanRepository(Context context) : base(context)
+    {
+    }
+
+    // If there are Loan-specific repository methods, implement them here.
+}

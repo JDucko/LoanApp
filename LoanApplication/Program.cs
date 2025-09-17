@@ -1,4 +1,5 @@
 using LoanApplication.Models;
+using LoanApplication.Data;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -7,7 +8,14 @@ var builder = WebApplication.CreateBuilder(args);
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 builder.Services.AddControllers();
-builder.Services.AddDbContext<LoanContext>(options => options.UseInMemoryDatabase("LoanList"));
+builder.Services.AddDbContext<Context>(options => options.UseInMemoryDatabase("LoanList"));
+// Repository and service registrations
+// Register open-generic repository base so concrete repos can be resolved if needed
+builder.Services.AddScoped(typeof(LoanApplication.Repos.Base.IRepoBase<,>), typeof(LoanApplication.Repos.Base.RepoBase<,>));
+// Concrete registrations
+builder.Services.AddScoped<LoanApplication.Repos.ILoanRepository, LoanApplication.Repos.LoanRepository>();
+builder.Services.AddScoped<LoanApplication.Services.ILoanService, LoanApplication.Services.LoanService>();
+// UnitOfWork registration removed
 
 var app = builder.Build();
 
