@@ -15,4 +15,7 @@ public class Loan : IEntity<int>
     public decimal AnnualInterestRate { get; set; }
     public PayFrequency Frequency { get; set; }
     public DateTime CreatedAt { get; set; }
+
+    public required User User { get; set; }
+    public List<LoanSchedule> LoanSchedules { get; set; } = [];
 }
