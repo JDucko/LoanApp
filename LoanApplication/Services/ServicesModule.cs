@@ -12,6 +12,10 @@ public class ServicesModule : Module
 
         builder.RegisterType<UserService>()
             .As<IUserService>()
-            .InstancePerLifetimeScope();    
+            .InstancePerLifetimeScope();
+
+        builder.RegisterType<LoanScheduleService>()
+            .As<ILoanScheduleService>()
+            .InstancePerLifetimeScope();  
     }
 }
