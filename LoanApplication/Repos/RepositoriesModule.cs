@@ -19,5 +19,9 @@ public class RepositoriesModule : Module
         builder.RegisterType<Repos.UserRepo.UserRepository>()
             .As<Repos.UserRepo.IUserRepository>()
             .InstancePerLifetimeScope();
+
+        builder.RegisterType<Repos.LoanScehduleRepo.LoanScheduleRepository>()
+            .As<Repos.ILoanScheduleRepository>()
+            .InstancePerLifetimeScope();
     }
 }
