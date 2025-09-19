@@ -22,7 +22,12 @@ public class UserService : IUserService
 
     public async Task<User> GetUserAsync(int id)
     {
-        return await _userRepository.GetByIdAsync(id);
+        var user = await _userRepository.GetByIdAsync(id);
+        if (user == null)
+        {
+            throw new InvalidOperationException($"User with ID {id} not found.");
+        }
+        return user;
     }
 
     public async Task<IEnumerable<User>> GetAllUsersAsync()
