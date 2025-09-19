@@ -9,10 +9,12 @@ namespace LoanApplication.Controllers;
 public class LoanController : ControllerBase
 {
     private readonly ILoanService _loanService;
+    private readonly ILoanScheduleService _loanScheduleService;
 
-    public LoanController(ILoanService loanService)
+    public LoanController(ILoanService loanService, ILoanScheduleService loanScheduleService)
     {
         _loanService = loanService;
+        _loanScheduleService = loanScheduleService;
     }
 
     // GET: api/Loan
@@ -42,8 +44,28 @@ public class LoanController : ControllerBase
     public async Task<ActionResult<Loan>> PostLoan(Loan loan)
     {
         //TODO: Validation and error handling
-        var created = await _loanService.CreateLoanAsync(loan);
-        return CreatedAtAction(nameof(GetLoanById), new { id = created.Id }, created);
+        if (loan == null)
+        {
+            return BadRequest("Loan object is null.");
+        }
+
+        if (loan.Amount <= 0)
+        {
+            return BadRequest("Loan amount must be greater than zero.");
+        }
+
+        if (loan.AnnualInterestRate < 0)
+        {
+            return BadRequest("Interest rate cannot be negative.");
+        }
+        
+        if (!Enum.IsDefined(typeof(PayFrequency), loan.Frequency))
+        {
+            return BadRequest("Invalid pay frequency.");
+        }
+
+        var createdLoan = await _loanService.CreateLoanAsync(loan);
+        return CreatedAtAction(nameof(GetLoanById), new { id = createdLoan.Id }, createdLoan);
     }
 
     private Task<bool> LoanExistsAsync(int id)
