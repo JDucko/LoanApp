@@ -13,8 +13,8 @@ public class LoanRepository : RepoBase<Loan, int>, ILoanRepository
     {
     }
 
-    public IEnumerable<Loan> GetLoansByUserId(int userId)
+    public async Task<IEnumerable<Loan>> GetLoansByUserId(int userId)
     {
-        return _context.Set<Loan>().Where(loan => loan.UserId == userId);
+        return await Task.Run(() =>  _context.Set<Loan>().Where(loan => loan.UserId == userId));
     }
 }
