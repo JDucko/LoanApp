@@ -10,6 +10,7 @@ public class Context : DbContext
      {
      }
  
-     public DbSet<User> Users { get; set; } = null!;
-    public DbSet<Loan> Loan { get; set; } = default!;
+    public DbSet<User> Users { get; set; } = null!;
+    public DbSet<Loan> Loans { get; set; } = default!;
+    public DbSet<LoanSchedule> LoanSchedules { get; set; } = default!;
  }
