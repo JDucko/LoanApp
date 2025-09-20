@@ -9,7 +9,5 @@ namespace LoanApplication.Entities
         public int Month { get; set; }
         public decimal MonthlyPayment { get; set; }
         public decimal RemainingBalance { get; set; }
-
-        public required Loan Loan { get; set; }
     }
 }

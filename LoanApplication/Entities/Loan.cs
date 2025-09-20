@@ -1,11 +1,13 @@
+
 namespace LoanApplication.Entities;
 
 public enum PayFrequency
 {
-    BiMonthly,
-    Monthly,
-    SemiAnnually,
-    Annually
+    
+    Monthly = 1,
+    BiMonthly = 2,
+    SemiAnnually = 6,
+    Annually = 12
 }
 public class Loan : IEntity<int>
 {
@@ -13,9 +15,8 @@ public class Loan : IEntity<int>
     public int UserId { get; set; }
     public decimal Amount { get; set; }
     public decimal AnnualInterestRate { get; set; }
+    public int LoanTermInMonths { get; set; }
     public PayFrequency Frequency { get; set; }
     public DateTime CreatedAt { get; set; }
-
-    public required User User { get; set; }
-    public IEnumerable<LoanSchedule> LoanSchedules { get; set; } = [];
+    public IEnumerable<LoanSchedule>? LoanSchedules { get; internal set; }
 }
