@@ -28,7 +28,7 @@ public class LoanService : ILoanService
     public async Task<IEnumerable<Loan>> GetAllLoansByUserIdAsync(int userId)
     {
         // Implement logic to get loans by user ID if needed
-        return await Task.FromResult(_loanRepository.GetLoansByUserId(userId));
+        return await _loanRepository.GetLoansByUserId(userId);
     }
 
     public async Task<Loan> CreateLoanAsync(Loan loan)
