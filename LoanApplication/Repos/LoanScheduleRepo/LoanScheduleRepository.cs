@@ -10,4 +10,9 @@ public class LoanScheduleRepository : RepoBase<LoanSchedule, int>, ILoanSchedule
     public LoanScheduleRepository(Context context) : base(context)
     {
     }
+
+    public async Task<IEnumerable<LoanSchedule>> GetLoanScheduleByLoanId(int loanId)
+    {
+        return await  Task.Run(() =>  _context.Set<LoanSchedule>().Where(schedule => schedule.LoanId == loanId));
+    }
 }
