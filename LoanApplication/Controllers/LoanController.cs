@@ -41,6 +41,19 @@ public class LoanController : ControllerBase
         return Ok(loan);
     }
 
+    [HttpGet("user/{userId}")]
+    public async Task<ActionResult<IEnumerable<Loan>>> GetLoansByUserId(int userId)
+    {
+        var loans = await _loanService.GetAllLoansByUserIdAsync(userId);
+
+        if (loans == null || !loans.Any())
+        {
+            return NotFound();
+        }
+
+        return Ok(loans);
+    }
+
     // POST: api/Loan
     [HttpPost]
     public async Task<ActionResult<Loan>> PostLoan(Loan loan)
