@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using LoanApplication.Services;
+using LoanApplication.Entities;
 
 namespace LoanApplication.Controllers
 {
@@ -15,9 +16,9 @@ namespace LoanApplication.Controllers
         }
 
         [HttpGet("{loanId}")]
-        public IActionResult GetSchedule(int loanId)
+        public async Task<ActionResult<IEnumerable<LoanSchedule>>> GetSchedule(int loanId)
         {
-            var schedule = _loanScheduleService.GetScheduleByLoanId(loanId);
+            var schedule = await _loanScheduleService.GetScheduleByLoanId(loanId);
             if (schedule == null)
                 return NotFound();
 
