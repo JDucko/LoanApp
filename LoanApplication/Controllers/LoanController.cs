@@ -48,7 +48,7 @@ public class LoanController : ControllerBase
 
         if (loans == null || !loans.Any())
         {
-            return NotFound();
+            return Ok(new List<Loan>()); // Return empty list if no loans found
         }
 
         return Ok(loans);
