@@ -42,6 +42,10 @@ public class Program
 
         app.UseHttpsRedirection();
 
+        // Serve static files from wwwroot for the basic frontend UI
+        app.UseDefaultFiles();
+        app.UseStaticFiles();
+
         app.MapControllers();
 
         app.Run();
