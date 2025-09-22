@@ -7,6 +7,8 @@ using NSwag.AspNetCore;
 using NSwag.AspNetCore.Middlewares;
 using Serilog;
 using Serilog.Events;
+using Serilog;
+using Serilog.Events;
 
 // Use the standard Autofac service provider factory
 
