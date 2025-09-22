@@ -1,21 +1,30 @@
 
 using LoanApplication.Entities;
 using LoanApplication.Repos;
+using Microsoft.Extensions.Logging;
 
 namespace LoanApplication.Services;
 
 public class LoanScheduleService : ILoanScheduleService
 {
     private readonly ILoanScheduleRepository _loanScheduleRepository;
+    private readonly ILogger<LoanScheduleService> _logger;
 
-    public LoanScheduleService(ILoanScheduleRepository loanScheduleRepository)
+    public LoanScheduleService(ILoanScheduleRepository loanScheduleRepository, ILogger<LoanScheduleService> logger)
     {
         _loanScheduleRepository = loanScheduleRepository;
+        _logger = logger;
     }
 
     public async Task<IEnumerable<LoanSchedule>> GetScheduleByLoanId(int loanId)
     {
-        return await _loanScheduleRepository.GetLoanScheduleByLoanId(loanId);
+        var schedule = await _loanScheduleRepository.GetLoanScheduleByLoanId(loanId);
+        if (schedule == null)
+        {
+            _logger.LogWarning("No schedule found for loan ID {LoanId}", loanId);
+        }
+
+        return schedule ?? Enumerable.Empty<LoanSchedule>();
     }
 
     public Loan CreateSchedule(Loan loan)
