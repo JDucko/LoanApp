@@ -77,6 +77,7 @@ function setLoanControlsEnabled(enabled) {
 document.getElementById('createLoanForm').addEventListener('submit', async (e) => {
   e.preventDefault();
   const userId = Number(document.getElementById('loanUserId').value);
+  const loanName = document.getElementById('loanName').value.trim();
   const amount = Number(document.getElementById('amount').value);
   const annualInterestRate = Number(document.getElementById('annualInterestRate').value);
   const loanTerm = Number(document.getElementById('loanTerm').value);
@@ -87,7 +88,7 @@ document.getElementById('createLoanForm').addEventListener('submit', async (e) =
     const loan = await fetchJson(`${apiBase}/Loan`, {
       method: 'POST',
       headers: {'Content-Type':'application/json'},
-      body: JSON.stringify({ userId, amount, annualInterestRate, loanTermInMonths: loanTerm, frequency })
+      body: JSON.stringify({ userId, loanName, amount, annualInterestRate, loanTermInMonths: loanTerm, frequency })
     });
     resultDiv.textContent = `Created loan ${loan.id} for user ${loan.userId}`;
     document.getElementById('createLoanForm').reset();
@@ -111,7 +112,7 @@ document.getElementById('loadLoans').addEventListener('click', async () => {
     loans.forEach(loan => {
       const div = document.createElement('div');
       div.className = 'loan';
-        div.innerHTML = `<div style="display:flex;justify-content:space-between;align-items:center"><strong>Loan #${loan.id}</strong> <small>Amount: ${loan.amount} | Rate: ${loan.annualInterestRate}% | Term: ${loan.loanTermInMonths} months</small></div>`;
+        div.innerHTML = `<div style="display:flex;justify-content:space-between;align-items:center"><strong>${loan.loanName}</strong> <small>Amount: ${loan.amount} | Rate: ${loan.annualInterestRate}% | Term: ${loan.loanTermInMonths} months</small></div>`;
         const viewBtn = document.createElement('button');
         viewBtn.textContent = 'View Schedule';
         viewBtn.style.marginTop = '8px';
@@ -155,26 +156,26 @@ async function showSchedule(loanId) {
   scheduleBody.innerHTML = 'Loading...';
   openSchedule();
   try {
-    const loan = await fetchJson(`${apiBase}/Loan/${loanId}`);
-    scheduleTitle.textContent = `Loan #${loan.id} Schedule`;
-    const schedules = loan.loanSchedules || [];
+    const schedules = await fetchJson(`${apiBase}/LoanSchedule/${loanId}`);
+    //scheduleTitle.textContent = `Loan #${loan.id} Schedule`;
+    
     if (schedules.length === 0) {
       scheduleBody.innerHTML = '<div>No schedule available</div>';
       return;
     }
     const table = document.createElement('table');
     table.className = 'schedule-table';
-    table.innerHTML = '<thead><tr><th>#</th><th>Due Date</th><th>Amount Due</th><th>Principal</th><th>Interest</th><th>Balance</th></tr></thead>';
+    table.innerHTML = '<thead><tr><th>Month</th><th>Monthly Payment</th><th>RemainingBalance</th></tr></thead>';
     const tbody = document.createElement('tbody');
     schedules.forEach((s, i) => {
       const tr = document.createElement('tr');
-      tr.innerHTML = `<td>${i+1}</td><td>${new Date(s.dueDate).toLocaleDateString()}</td><td>${s.amountDue}</td><td>${s.principal}</td><td>${s.interest}</td><td>${s.balanceAfterPayment}</td>`;
+      tr.innerHTML = `<td>${s.month}</td><td>${s.monthlyPayment}</td><td>${s.remainingBalance}</td>`;
       tbody.appendChild(tr);
     });
     table.appendChild(tbody);
     scheduleBody.innerHTML = '';
     scheduleBody.appendChild(table);
   } catch (err) {
-    scheduleBody.innerHTML = 'Error: ' + err.message;
+    scheduleBody.innerHTML = 'Error: ' + err.message; 
   }
 }
