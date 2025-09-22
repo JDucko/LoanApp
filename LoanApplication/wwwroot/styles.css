@@ -16,10 +16,10 @@ button:disabled{opacity:.6}
 .loan small{color:#666}
 
 /* Modal */
-.modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.4);z-index:1000}
+.modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.4);z-index:1000;}
 .modal[aria-hidden="false"]{display:flex}
 .modal-content{background:#fff;padding:18px;border-radius:8px;max-width:720px;width:90%;max-height:80vh;overflow:auto;position:relative}
-.modal-close{position:absolute;right:8px;top:8px;border:none;background:transparent;font-size:22px;cursor:pointer}
+.modal-close{position:absolute;right:8px;top:8px;border:none;background:transparent;font-size:22px;cursor:pointer;color: #aaa;}
 .schedule-table{width:100%;border-collapse:collapse;margin-top:12px}
 .schedule-table th,.schedule-table td{border:1px solid #eee;padding:8px;text-align:left}
 .schedule-table th{background:#f7f9fb}
