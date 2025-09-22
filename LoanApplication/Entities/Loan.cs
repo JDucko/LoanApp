@@ -13,6 +13,7 @@ public class Loan : IEntity<int>
 {
     public int Id { get; set; }
     public int UserId { get; set; }
+    public string LoanName { get; set; } = string.Empty;
     public decimal Amount { get; set; }
     public decimal AnnualInterestRate { get; set; }
     public int LoanTermInMonths { get; set; }

@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Loan Application UI</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Loan Application</h1>
+
+    <section class="card">
+      <h2>Create User</h2>
+      <form id="createUserForm">
+        <div class="form-row">
+          <label>First name</label>
+          <input type="text" id="firstName" required />
+        </div>
+        <div class="form-row">
+          <label>Last name</label>
+          <input type="text" id="lastName" required />
+        </div>
+        <div class="form-row actions">
+          <button type="submit">Create User</button>
+        </div>
+      </form>
+      <div id="createUserResult" class="result"></div>
+    </section>
+
+    <section class="card">
+      <h2>Create Loan for User</h2>
+      <div id="userRequiredNotice" class="notice">Please create a user first to enable loan actions.</div>
+      <form id="createLoanForm">
+        <div class="form-row">
+          <label>User</label>
+          <select id="loanUserId"></select>
+        </div>
+        <div class="form-row">
+          <label>Loan Name</label>
+          <input type="text" id="loanName" required />
+        </div>
+        <div class="form-row">
+          <label>Amount</label>
+          <input type="number" id="amount" step="0.01" required />
+        </div>
+        <div class="form-row">
+          <label>Annual Interest Rate (%)</label>
+          <input type="number" id="annualInterestRate" step="0.01" required />
+        </div>
+        <div class="form-row">
+          <label>Loan Term (months)</label>
+          <input type="number" id="loanTerm" required />
+        </div>
+        <div class="form-row">
+          <label>Frequency</label>
+          <select id="frequency">
+            <option value="1">Monthly</option>
+            <option value="2">BiMonthly</option>
+            <option value="6">SemiAnnually</option>
+            <option value="12">Annually</option>
+          </select>
+        </div>
+        <div class="form-row actions">
+          <button type="submit">Create Loan</button>
+        </div>
+      </form>
+      <div id="createLoanResult" class="result"></div>
+    </section>
+
+    <section class="card">
+      <h2>Loans for User</h2>
+      <div class="form-row">
+        <label>User</label>
+        <select id="loansUserId"></select>
+        <button id="loadLoans">Load Loans</button>
+      </div>
+      <div id="loansList"></div>
+    </section>
+
+    <!-- Schedule Modal -->
+    <div id="scheduleModal" class="modal" aria-hidden="true">
+      <div class="modal-content">
+        <button class="modal-close" id="closeSchedule">×</button>
+        <h3 id="scheduleTitle">Loan Schedule</h3>
+        <div id="scheduleBody">Loading...</div>
+      </div>
+    </div>
+
+  </div>
+  <script src="/app.js"></script>
+</body>
+</html>
