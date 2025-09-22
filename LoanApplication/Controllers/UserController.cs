@@ -37,7 +37,7 @@ namespace LoanApplication.Controllers
 
             if (user == null)
             {
-                return NotFound();
+                return NotFound("User not found");
             }
 
             return Ok(user);
@@ -48,7 +48,14 @@ namespace LoanApplication.Controllers
         [HttpPost]
         public async Task<ActionResult<User>> PostUser(User user)
         {
-            //TODO: Validation and error handling
+            if (user == null)
+            {
+                return BadRequest("User cannot be null");
+            }
+            if (string.IsNullOrWhiteSpace(user.FirstName) || string.IsNullOrWhiteSpace(user.LastName))
+            {
+                return BadRequest("User First Name and Last Name are required");
+            }
             
             await _userService.CreateUserAsync(user);
 
