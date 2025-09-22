@@ -64,6 +64,11 @@ public class LoanController : ControllerBase
             return BadRequest("Loan object is null.");
         }
 
+        if (loan.LoanName == null || loan.LoanName.Trim() == string.Empty)
+        {
+            return BadRequest("Loan name is required.");
+        }
+
         if (loan.Amount <= 0)
         {
             return BadRequest("Loan amount must be greater than zero.");
