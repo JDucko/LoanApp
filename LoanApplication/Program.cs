@@ -5,6 +5,8 @@ using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using NSwag.AspNetCore;
 using NSwag.AspNetCore.Middlewares;
+using Serilog;
+using Serilog.Events;
 
 // Use the standard Autofac service provider factory
 
@@ -13,6 +15,14 @@ public class Program
     public static void Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
+
+        // Configure Serilog from appsettings.json
+        Serilog.Log.Logger = new Serilog.LoggerConfiguration()
+            .ReadFrom.Configuration(builder.Configuration)
+            .CreateLogger();
+
+        // Replace default logging with Serilog
+        builder.Host.UseSerilog();
 
         // Use Autofac as the DI container
         builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
@@ -30,7 +40,10 @@ public class Program
         builder.Services.AddSwaggerGen();
         builder.Services.AddControllers();
         builder.Services.AddDbContext<Context>(options => options.UseInMemoryDatabase("LoanList"));
-        var app = builder.Build();
+    var app = builder.Build();
+
+    // enable request logging
+    app.UseSerilogRequestLogging();
 
         // Configure the HTTP request pipeline.
         if (app.Environment.IsDevelopment())
@@ -48,6 +61,13 @@ public class Program
 
         app.MapControllers();
 
-        app.Run();
+        try
+        {
+            app.Run();
+        }
+        finally
+        {
+            Serilog.Log.CloseAndFlush();
+        }
     }
 }
