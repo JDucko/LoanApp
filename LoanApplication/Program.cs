@@ -16,8 +16,8 @@ public class Program
     {
         var builder = WebApplication.CreateBuilder(args);
 
-        // Configure Serilog from appsettings.json
-        Serilog.Log.Logger = new Serilog.LoggerConfiguration()
+        // Configure Serilog from appsettings (builder.Configuration)
+        Log.Logger = new LoggerConfiguration()
             .ReadFrom.Configuration(builder.Configuration)
             .CreateLogger();
 
@@ -40,34 +40,42 @@ public class Program
         builder.Services.AddSwaggerGen();
         builder.Services.AddControllers();
         builder.Services.AddDbContext<Context>(options => options.UseInMemoryDatabase("LoanList"));
-        var app = builder.Build();
-
-        // enable request logging
-        app.UseSerilogRequestLogging();
-
-        // Configure the HTTP request pipeline.
-        if (app.Environment.IsDevelopment())
-        {
-            app.UseOpenApi();
-            app.UseSwagger();
-            app.UseSwaggerUI();
-        }
-
-        app.UseHttpsRedirection();
-
-        // Serve static files from wwwroot for the basic frontend UI
-        app.UseDefaultFiles();
-        app.UseStaticFiles();
-
-        app.MapControllers();
 
         try
         {
+            Log.Information("Starting web host");
+
+            var app = builder.Build();
+
+            // enable request logging
+            app.UseSerilogRequestLogging();
+
+            // Configure the HTTP request pipeline.
+            if (app.Environment.IsDevelopment())
+            {
+                app.UseOpenApi();
+                app.UseSwagger();
+                app.UseSwaggerUI();
+            }
+
+            app.UseHttpsRedirection();
+
+            // Serve static files from wwwroot for the basic frontend UI
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
+
+            app.MapControllers();
+
             app.Run();
+        }
+        catch (Exception ex)
+        {
+            Log.Fatal(ex, "Host terminated unexpectedly");
+            throw;
         }
         finally
         {
-            Serilog.Log.CloseAndFlush();
+            Log.CloseAndFlush();
         }
     }
 }
