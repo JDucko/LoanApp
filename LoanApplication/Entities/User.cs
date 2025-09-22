@@ -1,6 +1,6 @@
-namespace LoanApplication.Models;
+namespace LoanApplication.Entities;
 
-public class User
+public class User : IEntity<int>
 {
     public int Id { get; set; }
     public string FirstName { get; set; } = string.Empty;
