@@ -40,10 +40,10 @@ public class Program
         builder.Services.AddSwaggerGen();
         builder.Services.AddControllers();
         builder.Services.AddDbContext<Context>(options => options.UseInMemoryDatabase("LoanList"));
-    var app = builder.Build();
+        var app = builder.Build();
 
-    // enable request logging
-    app.UseSerilogRequestLogging();
+        // enable request logging
+        app.UseSerilogRequestLogging();
 
         // Configure the HTTP request pipeline.
         if (app.Environment.IsDevelopment())
